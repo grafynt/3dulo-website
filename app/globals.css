@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+:root {
+  --cream: #F5EFE0;
+  --black: #1A1A1A;
+  --green: #2D5F3F;
+  --tan: #C9A876;
+  --brown: #8B5E3C;
+  --red: #D14B3E;
+  --wa-green: #25D366;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--cream);
+  color: var(--black);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Inter Tight', sans-serif;
+}
+
+:focus-visible {
+  outline: 2px solid var(--green);
+  outline-offset: 2px;
+}
+
+/* === ANIMATION 1: Floating WA bounce === */
+@keyframes bounce-once {
+  0%, 100% { transform: translateY(0); }
+  20% { transform: translateY(-12px); }
+  40% { transform: translateY(-6px); }
+  60% { transform: translateY(-10px); }
+  80% { transform: translateY(-3px); }
+}
+.animate-bounce-once {
+  animation: bounce-once 1s ease-in-out 0.5s both;
+}
+
+/* === ANIMATION 2: Fade-up on scroll (Intersection Observer trigger) === */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-up {
+  opacity: 0;
+  transform: translateY(28px);
+}
+.fade-up.in-view {
+  animation: fade-up 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* === ANIMATION 3: Ticker / marquee for trust bar === */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.ticker-track {
+  display: flex;
+  width: max-content;
+  animation: ticker 22s linear infinite;
+}
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* === PRODUCT CARD: Green glow lift on hover (CSS only, no JS) === */
+.product-card-hover {
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.product-card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow:
+    0 8px 30px -4px rgba(45, 95, 63, 0.25),
+    0 2px 8px -2px rgba(45, 95, 63, 0.15);
+}
+
+.prose-3dulo h2 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--black);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--brown);
+}
+
+.prose-3dulo h3 {
+  font-family: 'Inter Tight', sans-serif;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--black);
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.prose-3dulo p {
+  margin-bottom: 1rem;
+  line-height: 1.7;
+  color: #2a2a2a;
+}
+
+.prose-3dulo ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.prose-3dulo li {
+  margin-bottom: 0.4rem;
+  line-height: 1.6;
+}
+
+.prose-3dulo strong {
+  font-weight: 700;
+  color: var(--black);
+}
+
+.prose-3dulo em {
+  font-style: italic;
+}
+
+.prose-3dulo table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+
+.prose-3dulo th {
+  background-color: var(--black);
+  color: var(--cream);
+  padding: 0.75rem 1rem;
+  text-align: left;
+}
+
+.prose-3dulo td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.prose-3dulo tr:nth-child(even) td {
+  background-color: #f9f6f0;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brown);
+  border-radius: 4px;
+}
