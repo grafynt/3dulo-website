@@ -187,10 +187,10 @@ export const products: Product[] = [
     category: 'wall-mount',
     price: 70000,
     priceSpecial: 90000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/large-edition-padel/1.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
-      '/images/products/wall-mount-v1/2.jpg',
+      '/images/products/large-edition-padel/1.jpg',
+      '/images/products/large-edition-padel/2.jpg',
     ],
     colors: ALL_COLORS,
     badge: 'New',
@@ -219,10 +219,10 @@ export const products: Product[] = [
     category: 'wall-mount',
     price: 55000,
     priceSpecial: 65000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/wall-mount-v1/3.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
-      '/images/products/wall-mount-v1/2.jpg',
+      '/images/products/wall-mount-v1/3.jpg',
+      '/images/products/wall-mount-v1/4.jpg',
     ],
     colors: ALL_COLORS,
     badge: undefined,
@@ -251,10 +251,10 @@ export const products: Product[] = [
     category: 'wall-mount',
     price: 60000,
     priceSpecial: 80000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/large-edition-padel/2.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
-      '/images/products/wall-mount-v1/2.jpg',
+      '/images/products/large-edition-padel/2.jpg',
+      '/images/products/large-edition-padel/1.jpg',
     ],
     colors: ALL_COLORS,
     badge: undefined,
@@ -451,9 +451,9 @@ export const products: Product[] = [
     category: 'aksesori',
     price: 60000,
     priceSpecial: 60000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/net-phone-holder/1.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
+      '/images/products/net-phone-holder/1.jpg',
     ],
     colors: [
       { name: 'Gold', hex: '#C9A876', tier: 'original' },
@@ -485,9 +485,9 @@ export const products: Product[] = [
     category: 'aksesori',
     price: 15000,
     priceSpecial: 15000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/net-phone-holder/2.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
+      '/images/products/net-phone-holder/2.jpg',
     ],
     colors: [
       { name: 'Black Glossy', hex: '#0A0A0A', tier: 'original' },
@@ -519,9 +519,9 @@ export const products: Product[] = [
     category: 'aksesori',
     price: 15000,
     priceSpecial: 15000,
-    thumbnail: '/images/products/wall-mount-v1/1.jpg',
+    thumbnail: '/images/products/net-phone-holder/1.jpg',
     images: [
-      '/images/products/wall-mount-v1/1.jpg',
+      '/images/products/net-phone-holder/1.jpg',
     ],
     colors: [
       { name: 'Black Doff', hex: '#1C1C1C', tier: 'original' },
