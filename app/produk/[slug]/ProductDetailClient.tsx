@@ -6,7 +6,7 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import ProductPageTimer from '@/components/ProductPageTimer';
-import { Product, formatPrice } from '@/lib/products';
+import { Product, formatPrice, CATEGORY_LABELS } from '@/lib/products';
 
 const BADGE_COLORS: Record<string, { bg: string; text: string }> = {
   Bestseller: { bg: '#2D5F3F', text: '#F5EFE0' },
@@ -102,7 +102,7 @@ export default function ProductDetailClient({ product, related }: Props) {
           {/* RIGHT: Product info */}
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest mb-2" style={{ color: '#8B5E3C' }}>
-              {product.category === 'padel' ? 'Holder Raket Padel' : 'Aksesoris Badminton'} • 3D Print Premium
+              {CATEGORY_LABELS[product.category]} • 3D Print Premium
             </p>
 
             <h1

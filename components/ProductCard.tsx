@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product, formatPrice } from '@/lib/products';
+import { Product, formatPrice, CATEGORY_LABELS } from '@/lib/products';
 
 type Props = {
   product: Product;
@@ -8,14 +8,17 @@ type Props = {
 
 const BADGE_COLORS: Record<string, { bg: string; text: string }> = {
   Bestseller: { bg: '#2D5F3F', text: '#F5EFE0' },
-  PreOrder: { bg: '#8B5E3C', text: '#F5EFE0' },
-  New: { bg: '#1A1A1A', text: '#F5EFE0' },
-  Diskon: { bg: '#D14B3E', text: '#F5EFE0' },
+  PreOrder:   { bg: '#8B5E3C', text: '#F5EFE0' },
+  New:        { bg: '#1A1A1A', text: '#F5EFE0' },
+  Diskon:     { bg: '#D14B3E', text: '#F5EFE0' },
 };
 
 export default function ProductCard({ product }: Props) {
   const badge = product.badge;
   const badgeStyle = badge ? BADGE_COLORS[badge] : null;
+  const discountPct = product.originalPrice
+    ? Math.round((1 - product.price / product.originalPrice) * 100)
+    : null;
 
   return (
     <Link
@@ -31,7 +34,7 @@ export default function ProductCard({ product }: Props) {
           fill
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
           className="object-cover transition-transform duration-500 group-hover:scale-105"
-
+          unoptimized
         />
 
         {/* Badge */}
@@ -45,34 +48,44 @@ export default function ProductCard({ product }: Props) {
         )}
 
         {/* Discount badge */}
-        {product.originalPrice && (
+        {discountPct && (
           <span
             className="absolute top-3 right-3 px-2 py-1 text-xs font-bold rounded"
             style={{ backgroundColor: '#D14B3E', color: '#F5EFE0' }}
           >
-            {Math.round((1 - product.price / product.originalPrice) * 100)}% OFF
+            {discountPct}% OFF
           </span>
         )}
       </div>
 
       {/* Content */}
       <div className="p-4">
+        {/* Category label */}
         <p
           className="text-xs font-medium mb-1 uppercase tracking-wider"
           style={{ color: '#8B5E3C' }}
         >
-          {product.category === 'padel' ? 'Padel' : 'Badminton'}
+          {CATEGORY_LABELS[product.category]}
         </p>
+
         <h3
-          className="font-bold text-sm sm:text-base leading-tight mb-2"
+          className="font-bold text-sm sm:text-base leading-tight mb-1"
           style={{ fontFamily: 'Inter Tight, sans-serif', color: '#1A1A1A' }}
         >
           {product.name}
         </h3>
 
+        {/* Tagline */}
+        <p
+          className="text-xs mb-3 leading-snug"
+          style={{ color: '#8B5E3C' }}
+        >
+          {product.tagline}
+        </p>
+
         {/* Color dots */}
-        <div className="flex gap-1.5 mb-3">
-          {product.colors.map((c) => (
+        <div className="flex gap-1.5 mb-3 flex-wrap">
+          {product.colors.slice(0, 7).map((c) => (
             <span
               key={c.name}
               title={c.name}
@@ -81,9 +94,14 @@ export default function ProductCard({ product }: Props) {
               aria-label={`Warna ${c.name}`}
             />
           ))}
+          {product.colors.length > 7 && (
+            <span className="text-xs" style={{ color: '#8B5E3C' }}>
+              +{product.colors.length - 7}
+            </span>
+          )}
         </div>
 
-        {/* Price + rating */}
+        {/* Price + sold */}
         <div className="flex items-end justify-between gap-2">
           <div>
             {product.originalPrice && (
@@ -91,19 +109,21 @@ export default function ProductCard({ product }: Props) {
                 {formatPrice(product.originalPrice)}
               </p>
             )}
-            <p
-              className="font-bold text-base"
-              style={{ color: '#1A1A1A' }}
-            >
+            <p className="font-bold text-base" style={{ color: '#1A1A1A' }}>
               {formatPrice(product.price)}
             </p>
+            {product.priceSpecial !== product.price && (
+              <p className="text-xs" style={{ color: '#8B5E3C' }}>
+                Special: {formatPrice(product.priceSpecial)}
+              </p>
+            )}
           </div>
           <div className="text-right">
             <p className="text-xs" style={{ color: '#8B5E3C' }}>
               ⭐ {product.marketplaceRating.toFixed(1)}
             </p>
             <p className="text-xs" style={{ color: '#8B5E3C' }}>
-              {product.marketplaceSold} terjual
+              {product.marketplaceSold}
             </p>
           </div>
         </div>
