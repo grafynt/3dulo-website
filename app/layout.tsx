@@ -2,7 +2,6 @@ import type { Metadata } from 'next';
 import { Inter_Tight, Plus_Jakarta_Sans, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
-import UrgencyBanner from '@/components/UrgencyBanner';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWAButton from '@/components/FloatingWAButton';
@@ -103,7 +102,6 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col" style={{ backgroundColor: '#F5EFE0' }}>
-        <UrgencyBanner />
         <Navbar />
         <main className="flex-1">{children}</main>
         <Footer />
