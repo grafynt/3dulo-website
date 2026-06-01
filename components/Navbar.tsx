@@ -4,6 +4,15 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useState, useEffect } from 'react';
 import { buildWAUrlFromContext, resolveRef } from '@/lib/whatsapp';
+import { useCart } from './CartProvider';
+
+const CART_ICON = (
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+    <circle cx="9" cy="21" r="1" />
+    <circle cx="20" cy="21" r="1" />
+    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+  </svg>
+);
 
 const WA_ICON = (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5" aria-hidden="true">
@@ -35,6 +44,7 @@ const navLinks = [
 export default function Navbar() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const { totalItems, openCart } = useCart();
 
   const [waUrl, setWaUrl] = useState('https://wa.me/6281319190388');
   useEffect(() => {
@@ -70,8 +80,26 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* WA icon button (desktop) */}
-        <div className="hidden md:flex items-center gap-4">
+        {/* WA icon button + Cart (desktop) */}
+        <div className="hidden md:flex items-center gap-3">
+          {/* Cart button */}
+          <button
+            onClick={openCart}
+            className="relative p-2 rounded-lg transition-opacity hover:opacity-70"
+            style={{ color: '#1A1A1A' }}
+            aria-label={`Keranjang${totalItems > 0 ? ` (${totalItems} item)` : ''}`}
+          >
+            {CART_ICON}
+            {totalItems > 0 && (
+              <span
+                className="absolute -top-1 -right-1 w-5 h-5 flex items-center justify-center text-xs font-bold rounded-full"
+                style={{ backgroundColor: '#D14B3E', color: '#fff' }}
+              >
+                {totalItems > 9 ? '9+' : totalItems}
+              </span>
+            )}
+          </button>
+
           <a
             href={waUrl}
             target="_blank"
@@ -85,15 +113,33 @@ export default function Navbar() {
           </a>
         </div>
 
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2 rounded"
-          style={{ color: '#1A1A1A' }}
-          aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
-          onClick={() => setMenuOpen(!menuOpen)}
-        >
-          {menuOpen ? CLOSE_ICON : MENU_ICON}
-        </button>
+        {/* Mobile: cart + hamburger */}
+        <div className="md:hidden flex items-center gap-2">
+          <button
+            onClick={openCart}
+            className="relative p-2 rounded"
+            style={{ color: '#1A1A1A' }}
+            aria-label={`Keranjang${totalItems > 0 ? ` (${totalItems} item)` : ''}`}
+          >
+            {CART_ICON}
+            {totalItems > 0 && (
+              <span
+                className="absolute -top-1 -right-1 w-4 h-4 flex items-center justify-center text-xs font-bold rounded-full"
+                style={{ backgroundColor: '#D14B3E', color: '#fff' }}
+              >
+                {totalItems > 9 ? '9+' : totalItems}
+              </span>
+            )}
+          </button>
+          <button
+            className="p-2 rounded"
+            style={{ color: '#1A1A1A' }}
+            aria-label={menuOpen ? 'Tutup menu' : 'Buka menu'}
+            onClick={() => setMenuOpen(!menuOpen)}
+          >
+            {menuOpen ? CLOSE_ICON : MENU_ICON}
+          </button>
+        </div>
       </div>
 
       {/* Mobile menu */}

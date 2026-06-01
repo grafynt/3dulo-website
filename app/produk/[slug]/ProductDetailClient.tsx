@@ -6,6 +6,7 @@ import Link from 'next/link';
 import ProductCard from '@/components/ProductCard';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import ProductPageTimer from '@/components/ProductPageTimer';
+import { useCart } from '@/components/CartProvider';
 import { Product, formatPrice, CATEGORY_LABELS } from '@/lib/products';
 
 const BADGE_COLORS: Record<string, { bg: string; text: string }> = {
@@ -42,8 +43,16 @@ type Props = {
 export default function ProductDetailClient({ product, related }: Props) {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [activeImage, setActiveImage] = useState(0);
+  const [added, setAdded] = useState(false);
+  const { addItem, openCart } = useCart();
 
   const badgeStyle = product.badge ? BADGE_COLORS[product.badge] : null;
+
+  function handleAddToCart() {
+    addItem(product, selectedColor.name);
+    setAdded(true);
+    setTimeout(() => setAdded(false), 1500);
+  }
 
   return (
     <div style={{ backgroundColor: '#F5EFE0' }}>
@@ -190,6 +199,18 @@ export default function ProductDetailClient({ product, related }: Props) {
             <div className="mb-4">
               <ProductPageTimer productSlug={product.slug} />
             </div>
+
+            {/* Add to cart button */}
+            <button
+              onClick={handleAddToCart}
+              className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl font-bold text-base mb-3 transition-all"
+              style={{
+                backgroundColor: added ? '#2D5F3F' : '#1A1A1A',
+                color: '#F5EFE0',
+              }}
+            >
+              {added ? '✓ Ditambahkan ke Keranjang!' : '🛒 Tambah ke Keranjang'}
+            </button>
 
             <WhatsAppButton
               product={product.name}

@@ -5,6 +5,8 @@ import { SpeedInsights } from '@vercel/speed-insights/next';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FloatingWAButton from '@/components/FloatingWAButton';
+import { CartProvider } from '@/components/CartProvider';
+import CartDrawer from '@/components/CartDrawer';
 import './globals.css';
 
 const interTight = Inter_Tight({
@@ -102,10 +104,13 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col" style={{ backgroundColor: '#F5EFE0' }}>
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
-        <FloatingWAButton />
+        <CartProvider>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+          <FloatingWAButton />
+          <CartDrawer />
+        </CartProvider>
         <Analytics />
         <SpeedInsights />
       </body>
